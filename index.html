@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>營養師上線手冊 · Cofit 特約診所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E2A30; --teal:#1F4E5C; --teal2:#2E6E7E; --teal3:#3E8394;
+  --paper:#EEF3F3; --card:#FFFFFF; --line:#D6E2E2; --muted:#5C7076;
+  --alert:#C4553B; --alert-soft:#FBEDE9; --ok:#2E7D5B; --gold:#9A6B12;
+  --shadow:0 1px 3px rgba(14,42,48,.08),0 6px 18px rgba(14,42,48,.06);
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Noto Sans TC",system-ui,sans-serif;line-height:1.6;
+  padding-bottom:env(safe-area-inset-bottom);}
+h1,h2,h3{font-family:"Noto Serif TC",serif;line-height:1.35;margin:0}
+a{color:var(--teal2)}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+/* header */
+header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,var(--teal),var(--teal2));
+  color:#fff;box-shadow:var(--shadow)}
+.hd{display:flex;align-items:center;gap:12px;padding:12px 16px;max-width:860px;margin:0 auto}
+.logo{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;letter-spacing:.5px;white-space:nowrap}
+.logo small{display:block;font-family:"Noto Sans TC";font-weight:400;font-size:11px;opacity:.85;letter-spacing:0}
+.modewrap{margin-left:auto;display:flex;background:rgba(255,255,255,.15);border-radius:999px;padding:3px}
+.modewrap button{border:0;background:transparent;color:#fff;font:inherit;font-size:13px;font-weight:500;
+  padding:6px 13px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.modewrap button[aria-pressed="true"]{background:#fff;color:var(--teal)}
+.searchbar{padding:0 16px 12px;max-width:860px;margin:0 auto}
+.searchbar input{width:100%;border:0;border-radius:10px;padding:11px 14px;font:inherit;font-size:15px;
+  background:rgba(255,255,255,.95);color:var(--ink)}
+.searchbar input::placeholder{color:#8aa0a4}
+
+/* chip nav */
+nav.chips{position:sticky;top:0;z-index:30;background:var(--paper);
+  border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.chips::-webkit-scrollbar{display:none}
+.chips-inner{display:flex;gap:8px;padding:10px 16px;max-width:860px;margin:0 auto;width:max-content;min-width:100%}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--teal);font:inherit;font-size:13px;font-weight:500;
+  padding:7px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:.15s}
+.chip[aria-current="true"]{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+main{padding:18px 0 90px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal3);font-weight:700;margin-bottom:6px}
+.sec-title{font-size:23px;color:var(--ink);margin-bottom:4px}
+.sec-desc{color:var(--muted);font-size:14px;margin:0 0 16px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 17px;margin:0 0 12px;box-shadow:var(--shadow)}
+.card h3{font-size:16.5px;color:var(--teal);margin-bottom:3px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.card .meta{font-family:"Noto Sans TC";font-weight:500;font-size:12px;color:#fff;background:var(--teal3);
+  padding:2px 9px;border-radius:999px;letter-spacing:0}
+.card .body{font-size:14.5px;color:#243b40;white-space:pre-line}
+.card .body b{color:var(--teal)}
+.card .body a{color:var(--teal2);text-decoration:underline;word-break:break-all}
+.field{padding:10px 0;border-top:1px solid #eef2f2}
+.field:first-child{border-top:0;padding-top:2px}
+.flabel{font-weight:700;color:var(--teal);font-size:13.5px;margin-bottom:5px;letter-spacing:.01em}
+.ftext{font-size:14.5px;color:#243b40}
+.numline{padding:3px 0;font-size:14.5px;color:#243b40}
+ol.steps{list-style:none;margin:5px 0 0;padding:0;counter-reset:s}
+ol.steps li{position:relative;padding:6px 0 6px 30px;font-size:14.5px;color:#243b40}
+ol.steps li:not(:last-child){border-bottom:1px dashed #eef2f2}
+ol.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:6px;width:20px;height:20px;background:var(--teal3);color:#fff;border-radius:50%;font-size:11px;line-height:20px;text-align:center;font-weight:700}
+ul.bullets{list-style:none;margin:5px 0 0;padding:0}
+ul.bullets li{position:relative;padding:4px 0 4px 16px;font-size:14.5px;color:#243b40}
+ul.bullets li:before{content:"";position:absolute;left:2px;top:13px;width:5px;height:5px;background:var(--teal3);border-radius:50%}
+
+/* safety card variant */
+.card.safe{border-color:#e7c3b8;background:linear-gradient(180deg,#fff,var(--alert-soft))}
+.card.safe h3{color:var(--alert)}
+.card.safe .meta{background:var(--alert)}
+.card.line{border-left:4px solid var(--teal3)}
+
+/* floating safety button */
+.fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:45;
+  background:var(--alert);color:#fff;border:0;border-radius:999px;padding:13px 18px;font:inherit;font-weight:700;
+  box-shadow:0 6px 20px rgba(196,85,59,.4);cursor:pointer;font-size:14px}
+.fab:focus-visible,button:focus-visible,input:focus-visible,.chip:focus-visible{outline:3px solid #7fb4c0;outline-offset:2px}
+
+/* overlay (safety sheet + gate) */
+.overlay{position:fixed;inset:0;z-index:60;background:rgba(14,42,48,.5);display:none;align-items:flex-end;justify-content:center}
+.overlay.open{display:flex}
+.sheet{background:var(--paper);width:100%;max-width:860px;border-radius:20px 20px 0 0;padding:20px 18px 30px;max-height:86vh;overflow:auto}
+.sheet h2{font-size:20px;color:var(--ink);margin-bottom:12px}
+.sheet .x{float:right;border:0;background:var(--line);color:var(--ink);border-radius:999px;width:34px;height:34px;font-size:18px;cursor:pointer}
+.gate .sheet{border-radius:20px;align-self:center;max-width:420px}
+.gate{align-items:center}
+.gate input{width:100%;padding:12px;font:inherit;font-size:16px;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.gate button.go{width:100%;padding:12px;border:0;border-radius:10px;background:var(--teal);color:#fff;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.note{font-size:12.5px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
+.err{color:var(--alert);font-size:13px;min-height:18px;margin-top:6px}
+
+.empty{text-align:center;color:var(--muted);padding:40px 20px}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tag{font-size:12px;background:#eaf1f1;color:var(--teal2);padding:2px 8px;border-radius:6px}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:20px}
+mark{background:#fdf0c8;color:inherit;padding:0 1px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media(min-width:640px){.sec-title{font-size:27px}.hd{padding:14px 16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd">
+    <div class="logo">營養師上線手冊<small>Cofit · 外部特約診所</small></div>
+    <div class="modewrap" role="group" aria-label="切換模式">
+      <button id="m-front" aria-pressed="true" onclick="setMode('front')">營養師前台</button>
+      <button id="m-back" aria-pressed="false" onclick="setMode('back')">管理後台</button>
+    </div>
+  </div>
+  <div class="searchbar"><input id="q" type="search" placeholder="搜尋：海鹽、猛健樂、關聯訂單、續療…" oninput="render()" aria-label="搜尋內容"></div>
+</header>
+
+<nav class="chips" aria-label="章節"><div class="chips-inner" id="chips"></div></nav>
+<main><div class="wrap" id="content"></div></main>
+
+<button class="fab" onclick="openSheet('safety')">⚠ 安全三網</button>
+
+<!-- safety sheet -->
+<div class="overlay" id="ov-safety">
+  <div class="sheet">
+    <button class="x" onclick="closeSheet('safety')" aria-label="關閉">×</button>
+    <h2>安全三網 · 隨時記得</h2>
+    <p style="font-size:14px;color:var(--muted);margin:0 0 10px">遇到拿不準的狀況，這三句話能同時保護客戶與您自己。</p>
+    <div class="card safe"><div class="body"><b>1 不確定時</b> → 「這部分我幫您向醫師／營養師確認。」先確認，不需勉強回答。
+<b>2 藥物讓您不舒服</b> → 可以先停用並回報，不需勉強忍耐。
+<b>3 報告、診斷、調整用藥</b> → 都交由醫師判斷。</div></div>
+    <div class="card line"><h3>執業界線</h3><div class="body"><b>營養師可做：</b>飲食衛教、餐盤、行為追蹤、營養品用法指導、生活調整、蒐集病史並轉達醫師。
+<b>一律轉醫師：</b>藥物解說、藥理機轉、抽血/InBody 報告判讀、疾病診斷、藥物劑量與調藥。
+客戶有相關病史或禁忌，務必讓醫師知道（只蒐集告知、不判斷）。</div></div>
+  </div>
+</div>
+
+<!-- gate -->
+<div class="overlay gate" id="ov-gate">
+  <div class="sheet">
+    <h2>管理後台</h2>
+    <p style="font-size:14px;color:var(--muted);margin:0">後台放上線路徑、能力檢核、考核面談、啟用清單、90 天教練等管理內容。</p>
+    <input id="pass" type="password" placeholder="輸入通行碼" onkeydown="if(event.key==='Enter')tryGate()">
+    <div class="err" id="gate-err"></div>
+    <button class="go" onclick="tryGate()">進入後台</button>
+    <div class="note">⚠ 這道通行碼只是「分流、避免客人誤點」，<b>不是真正的安全鎖</b>——公開網頁的內容任何人查看原始碼都看得到。因此帳密、問卷驗證碼、機密資料<b>一律不放在此網頁</b>；需要真正權限控管請改用可登入的內部平台。</div>
+    <button class="go" style="background:var(--line);color:var(--ink);margin-top:8px" onclick="closeGate()">回前台</button>
+  </div>
+</div>
+
+<footer id="foot"></footer>
+
+<script>
+/* ====== 通行碼：請改成你們自己的；提醒：僅分流用，勿放機密 ====== */
+const PASSCODE = "cofit2026";
+
+/* ====== 內容資料（取自主檔與考核包非機密部分） ====== */
+const DATA = {
+ front:[
+  {id:"card",eyebrow:"上場隨手查",title:"角色速查卡",desc:"依您目前的階段與角色，查看對應的那一張；上場前看一眼，心裡更有底。",items:[
+   {t:"現場服務／衛教",m:"階段1",b:"<b>衛教依入療狀況：</b>入療客戶講完整用餐四原則（A 餐盤）；初診未入療只講 211N 餐盤、不講其他餐盤。\n<b>用餐四原則（入療）：</b>①比例 蔬菜3:蛋白2:碳水1（拳頭法，不秤重不算熱量）②頻率 一天三餐內、不吃零食點心宵夜 ③時間 最後一餐與隔天第一餐間隔>10–12小時、睡前3小時不進食 ④順序 水→肉→菜→飯→果。\n<b>一定要做：</b>App 連線加「專家」群、回傳本名、傳藥物+飲食注意事項；保健品用法指導；填療程表/回診紀錄。\n<b>預約與領藥：</b>回診／抽血預約由現場營養師主責、當天處理完畢；入療領藥時，客人在原位等候不用移動，由營養師開單，再由櫃檯（廣川）或諮詢師（佳醫）領藥後提供。\n<b>數字：</b>水=體重×40ml；海鹽每天6小匙；8週約降8%（男8–10/女6–8）；每週約減1%。\n<b>不做/轉出：</b>不判讀報告、不解說藥理、不調劑量、不報價續約。"},
+   {t:"前諮",m:"階段2",b:"<b>目的：</b>建立關係、了解到診動機、提高入療興趣、幫醫師快速掌握客戶。\n<b>流程：</b>說明諮詢目的→了解客戶(目標/痛點、病史減重史生活型態、過去盲點、荷爾蒙分析)→導入概念(胰島素阻抗、InBody、OGTT 的重要與獨特)→結尾說明當天流程。\n<b>篩禁忌（務必轉醫師）：</b>癌症治療中、懷孕、重大疾病急性期→提醒醫師、不自行決定。\n<b>入系統：</b>確認減重史/疾病史/用藥並備註；彙整重點交接醫師。\n<b>場控：</b>遲到>5–10分請客服聯繫；等待>15分主動排除。"},
+   {t:"銷售／主營養師",m:"階段3",b:"<b>定位：</b>依醫師建議提供適合方案；銷售後即為該客主營養師（同一人、負責到底）。\n<b>報價（依所屬院所，以現場公告為準）：</b>廣川 入初次 32,999／59,800；續療 19,999／48,800；當天入療刷卡=套組價扣已收5,200（初診1,200+檢驗4,000）＝尊榮54,600／基礎27,799。佳醫 78,000／68,000／98,000（贈結晶鹽+維生素D檢測；98,000 完美瘦身組新增 LPG 10代1堂）。佳醫初診收費：僅門診免收費／檢測6,000(含回診看報告)／療程依費用。療程可分期，診費/抽血費不可分期。\n<b>必做：</b>完成訂單(獎金依據)、一覽表(獎金依據)、創建療程；確保抽血／領藥／衛教／預約下次回診都完成；交接客戶狀態；未付款持續追蹤。訂單規則：純門診未領物不需開，有領到東西(含贈品)或有消費才開、免費品項開零元訂單。\n<b>持續責任：</b>追蹤體重(週減1%)、監督上傳、消失回報客服LINE；若現場曾藥物不足，確認客人拿到正確藥量。\n<b>領藥／發藥／同意書分工：</b>廣川—領藥、初診提供用藥、療程同意書、發藥、簽同意書主責為櫃檯，人力不足時營養師補位。佳醫—以上主責為諮詢師，發藥人力不足時營養師補位。\n<b>續療/未續療：</b>未續療—確認做完、親切送客、原則不收費。續療—確認做完→收費(續療費+加購)→配發保健品（鎂、鋅、海洋濃縮滴劑、結晶鹽；有 CofitMe 再拿一盒）→約下次-2拿藥。"},
+  ]},
+  {id:"diet",eyebrow:"初診入療衛教",title:"用餐四大原則",desc:"初診衛教的核心。掌握這四個原則，就能陪客戶穩穩開始。",items:[
+   {t:"① 用餐比例",m:"餐盤321",b:"蔬菜3：蛋白質2：碳水1。拳頭法：一拳飯配兩拳肉、三拳菜，可等比例放大縮小。不秤重、不算熱量。吃飽不吃撐、也不餓肚子。這是所有原則的核心。"},
+   {t:"② 用餐頻率",m:"三次內",b:"一天用餐以三次為限，不吃零食、點心、宵夜；避免少量多餐（血糖起伏最亂）。讓餐與餐之間血糖與胰島素回穩。"},
+   {t:"③ 用餐時間",m:"拉長空腹",b:"當天最後一餐與隔天第一餐間隔要超過 10–12 小時（例：晚上7點吃完→隔天早上7點後再吃）。睡前約3小時不再進食。"},
+   {t:"④ 進食順序",m:"水肉菜飯果",b:"水→肉→菜→飯→果，有助穩定血糖、增加燃脂。\n這 8 週療程建議先暫停「果」：水果與乳品先停用，等胰島素阻抗改善後再逐步加回。"},
+   {t:"食物與用油",m:"補充",b:"原型新鮮、少加工；主食越原型越好(地瓜/南瓜/玉米/山藥/馬鈴薯/豆類)，糙米>白米>白麵。避開油炸但不無油，優質油脂(橄欖/苦茶/酪梨油)。療程中暫避水果與乳製品，改善後再逐步加回。海鹽每天6小匙。"},
+  ]},
+  {id:"n211",eyebrow:"未入療衛教",title:"211N 餐盤",desc:"初診未入療時只教這一個餐盤，不講其他。入療客戶才講完整的用餐四原則（A 餐盤）。",items:[
+   {t:"餐盤比例",m:"2:1:1",b:"蔬菜類 2（2–3份）：全穀雜糧類 1（2–3份）：優質蛋白質 1（2–3份）。也就是半盤蔬菜、¼ 全穀雜糧、¼ 優質蛋白。"},
+   {t:"原則一 · 蔬菜",m:"至少2份",b:"蔬菜含豐富膳食纖維、維生素、礦物質與植化素，減重時能幫助代謝、建立良好腸道菌相並抗發炎。至少兩份，多選不同顏色，其中至少一種深綠、深紅或深黃的深色蔬菜。"},
+   {t:"原則二 · 全穀雜糧",m:"非精緻",b:"主食選非精緻的全穀雜糧，更有飽足感、營養充足、也有利新陳代謝。例如糙米飯、燕麥飯、玉米、紅豆、綠豆、蕎麥麵；也可用地瓜、南瓜、蓮藕、山藥等替代。"},
+   {t:"原則三 · 優質蛋白質",m:"長肌肉",b:"優質蛋白質是生長肌肉不可或缺的原料。來源有蛋、魚、肉、黃豆、黑豆、豆腐（豆類製品）與毛豆；吃素者可以黃豆、黑豆、豆腐、毛豆等植物性為主要來源。"},
+  ]},
+  {id:"dispense",eyebrow:"發藥物說明",title:"發藥時怎麼說",desc:"發藥時，我們把用法、保存與注意事項說清楚；劑量調整、換藥與報告判讀，都交由醫師把關。",items:[
+   {t:"發藥總則",m:"界線",b:"發藥時說明用法、保存、漏服/漏打、常見不適。劑量、是否調整或換藥、報告判讀一律醫師；藥物不舒服可「直接停用並回報」。針劑處理依院所（佳醫院內每週施打、不帶走）。發藥都要填單簽名、寫用法與日期給客戶帶回。"},
+   {t:"瑞倍適 Rybelsus",m:"口服腸泌素",b:"每日一次、早上空腹，整顆吞、配少量水(最多120ml)，不剝/壓/嚼；服後至少30分鐘再進食、喝水或吃其他口服藥。腸胃不適前3天~1週常見會緩解。"},
+   {t:"猛健樂 Mounjaro",m:"針劑腸泌素",b:"每週固定一天皮下注射(腹部/大腿/上臂輪替)，任何時間可打、不看進食。若要改日期，兩劑之間間隔至少 3 天。忘記打：96小時(4天)內盡快補、超過就跳過，切勿補兩次。冷藏 2–8°C、勿冷凍。針頭丟硬容器帶回診所回收。"},
+   {t:"週纖達 Wegovy",m:"針劑腸泌素",b:"每週固定一天皮下注射、部位輪替；冷藏2–8°C、勿冷凍。漏打勿補兩次、保存與回收比照針劑腸泌素。劑量遞增由醫師安排。"},
+   {t:"恩排糖 Jardiance",m:"排糖藥",b:"每日一次口服(多於早上)，可與或不與食物。多喝水、不憋尿、注意泌尿道與生殖部位清潔；補足水分與電解質(海鹽/鎂/鋅)。不適可直接停用並回報醫師。"},
+   {t:"保健品",m:"用法",b:"礦物質濃縮液每日2次每次3滴(加≥300ml水)；海鹽每天6小匙；鎂每日1粒；鋅每日1粒；CofitMe 由營養師依個案安排、每月可不同。皆寫清楚用法與日期給客戶帶回。"},
+  ]},
+  {id:"qa",eyebrow:"客戶事後問題",title:"藥物 Q&A 回覆",desc:"客戶最常問的幾題。先安撫、給方向並回報；個別的用藥調整，再請醫師協助。",items:[
+   {t:"藥物讓我不舒服？",m:"通則",b:"「任何藥物讓您不舒服，都可以『直接停止』使用，不需勉強忍耐，並馬上回報營養師/客服，我們會協助反映醫師。」是否恢復用藥、調劑量由醫師決定。"},
+   {t:"排糖藥忘記吃？",m:"恩排糖",b:"漏服原則：①距下次服藥時間「超過 12 小時」→可馬上補吃正常劑量一顆。②已接近隔天或下次固定服藥時間→放棄該次、切勿服用兩倍藥量（以免水分流失過多或不適）。有疑問先問營養師。"},
+   {t:"口服腸泌素忘記吃？",m:"瑞倍適",b:"當天忘記通常「跳過該次」、隔天正常服用，不補服。實際依醫師指示。"},
+   {t:"忘記打針？",m:"針劑腸泌素",b:"漏打96小時(4天)內盡快補打一次，之後回原本每週固定日；超過就跳過、下週原時間再打。切勿補兩針。"},
+   {t:"腸胃不適/血糖低/泌尿道",m:"常見",b:"<b>腸胃(想吐脹)：</b>前3天~1週常見，少量清淡慢吃、補水；嚴重或吃不下→停並回報。\n<b>血糖偏低(頭暈無力)：</b>補水＋海鹽/鎂/鋅、適度進食。\n<b>泌尿道(頻尿搔癢)：</b>多喝水、不憋尿、注意清潔；疑似感染→轉醫師。"},
+  ]},
+  {id:"sys",eyebrow:"系統操作",title:"SB / HIS 步驟",desc:"逐步操作指引。實際畫面截圖請見上線流程表文件，或請帶班陪您走一次。",items:[
+   {t:"上線口訣",m:"記住",b:"預約要正確、HIS 要有紀錄、有消費要建單、入療要建療程、有欠款要填表、客戶問題回 App 找營養師。"},
+   {t:"SB 回診預約",m:"步驟",b:"進日曆確認診別與醫師(勿選到門診/護理欄)→初診回診皆30分一診→搜尋姓名/手機(手機查詢不用打「+」)→服務選「XX醫師 回診」(需與實際看診一致)→按儲存(存前再核姓名/手機/日期/時間)→回日曆確認看到該筆才算完成。"},
+   {t:"SB 取消／改期",m:"步驟",b:"取消：點原預約→確認個資→按取消(再核姓名/手機/時間避免取消錯人)。改期：先取消再重建、確認新預約已在日曆。"},
+   {t:"SB 抽血預約",m:"FR代號",b:"FR01D→護理(20分鐘)＋抽血(OGTT)三段式；FR06D→護理(10分鐘)＋抽血(空腹)。建立後回日曆確認。"},
+   {t:"HIS 到診確認",m:"報到前提",b:"HIS主頁確認櫃檯已「建立病例→完成問卷→按報到」；缺哪步找櫃檯。再用姓名/電話搜尋進正確客戶頁，看預約歷程確認來診目的。"},
+   {t:"建立訂單",m:"10步",b:"何時建：有消費/拿藥/購療程/保健品/檢驗都要建；純門診未領物不需開；免費/附贈開零元訂單。\n步驟：訂單紀錄→＋建立新訂單→填人員(醫師/主營養師/前諮/健康秘書)→醫師有開藥選『關聯訂單』(對應開藥日)→選當天品項→銷售類別(CofitMe/附贈選『療程加贈』)→療程內含品項勾選歸零(不重複收費)→確認總金額→下一步預覽→確認→狀態『準備結帳』。"},
+   {t:"創建療程",m:"8步",b:"顧客歷程→療程資訊→編輯→先填必要人員(醫師/主營養師/健康秘書必填綠框)→先按確認暫存(套裝名稱一開始顯示『未入療』)→回編輯選正確套裝與療程時間→按『療程階段』建立→回診當天有報到才進來打勾。"},
+   {t:"付款一覽表",m:"每日",b:"當天上班營養師下班前完成。欠款→填欠收金額(要加總)；加購保健品→寫品名+數量；退費→寫原因；純看診/純抽血無欠款→依內部規範。"},
+  ]},
+  {id:"cofitme",eyebrow:"營養品",title:"CofitMe 六包速查",desc:"六款保健包的功能、服用時機、成分與素食別；為客戶挑選時可對照。",items:[
+   {t:"L055 代謝包",m:"穩醣·餐前",b:"苦瓜胜肽 + 寶纖(非洲芒果) + 轉糖麥膠囊。全素。苦瓜胜肽孕婦忌食。"},
+   {t:"L064 熱能包",m:"阻油·餐後",b:"燃纖萃 + 代謝棕渦輪(黑生薑+B)。全素。"},
+   {t:"L082 舒釋包",m:"舒壓充電·睡前",b:"舒衡 + 益甘耐 + 氧妍萃。全素。舒衡：嬰幼/孕/老年/腸胃不佳不宜；益甘耐含芝麻。"},
+   {t:"H015 消食包",m:"外食協助·餐後",b:"苦瓜胜肽 + 順酵 + 代謝棕渦輪。蛋奶素(順酵含牛奶大豆)。孕婦忌苦瓜胜肽。"},
+   {t:"H024 賦活包",m:"促代謝·餐後",b:"肉鹼燃金錠 + 順酵 + 代謝棕渦輪。蛋奶素(順酵含牛奶大豆)。肉鹼含鐵(小黑斑正常)。"},
+   {t:"H033 鬆弛包",m:"放鬆入眠·睡前",b:"舒淨 + 肉鹼燃金錠。蛋奶素。舒淨含芝麻。"},
+   {t:"需求對應（口訣）",m:"選品",b:"不用背成分，記『哪個包對應哪個需求』：消食包＝消化/血糖/代謝(外食)、賦活包＝產熱/棕色脂肪(促代謝)、鬆弛包＝助眠/情緒、熱能包＝燃脂/產熱(阻油)、舒釋包＝護肝/抗氧化/壓力(舒壓)、代謝包＝阻澱粉/穩血糖(穩醣)。依真實需求推薦。"},
+  ]},
+  {id:"timeline",eyebrow:"療程",title:"回診時間軸",desc:"四次門診（含初診）的共用時間軸，安排回診時可對照。",items:[
+   {t:"首次8週療程",m:"W1→W8",b:"W1 初診：入療程＋抽血 FR01D → W2 看抽血報告(1-1) → W4 拿第二個月藥(1-2拿藥) → W7 抽血 FR06D(不用回診) → W8 看第二份報告(1-2看報告)決定續約。共四次門診含初診。"},
+   {t:"線上開班時間",m:"週三分界",b:"入療在『週三之前』→最快下週一開班；入療在『週三之後』→下下週一開班。開班固定週一，營養師自開班日起評估餐盤。"},
+   {t:"抽血代號",m:"FR",b:"含OGTT：FR01D(三段式、第一週)；不含OGTT：FR06D(第七週)。續療 FR01D 約半年抽一次(第3/6/9療程)。"},
+  ]},
+  {id:"law",eyebrow:"法遵",title:"可講／不能講",desc:"醫療廣告的界線提醒（內部參考、非法律意見）。拿捏不準時寧可保守，並交由法遵／法務把關。",items:[
+   {t:"處方藥",m:"最重要",b:"<b>可：</b>對已就診客戶由醫師/衛教說明用法。<b>不能：</b>對一般大眾宣傳處方藥(腸泌素/Jardiance)、以藥名招攬。"},
+   {t:"療效/數字",m:"紅線",b:"<b>可：</b>「多數人8週約可減一個範圍、因人而異、需配合」。<b>不能：</b>保證瘦X公斤、一定有效、無效退費式療效保證。"},
+   {t:"其他常見紅線",m:"紅線",b:"不用「根治/永久/最/唯一/第一/100%」；不用個案前後對比作療效保證；保健品不宣稱醫療效能；不貶低同業；不保證無副作用。正式對外文宣一律經法遵/法務審查。"},
+  ]},
+  {id:"video",eyebrow:"影片課程",title:"Google Classroom",desc:"課程影片統一放在 Google Classroom，這裡提供連結，方便隨時複習。",items:[
+   {t:"培訓課程 Classroom",m:"連結",b:"請先登入你們的 Google 帳號後開啟（依院所／階段開課）：\n課程一：https://classroom.google.com/c/ODIzMTMwMzI0MjE2\n課程二：https://classroom.google.com/c/NzkxNDI0NjUxNjQ4\n影片統一在此觀看，速查卡搭配現場使用。"},
+  ]},
+  {id:"where",eyebrow:"找不到？",title:"沒有的內容去哪查",desc:"手冊沒收錄、或需要更完整的方案細節時，先看這裡找到對的地方或窗口。若仍不確定，請放心問主營養師——先確認再回覆，永遠比猜測更專業。",items:[
+   {t:"完整方案細節／套組內容",m:"去哪查",b:"各療程套組『包含什麼』的完整明細，以現場公告與療程計畫書為準；也見主檔 04/05/07。不確定→問主營養師或現場諮詢師。"},
+   {t:"價格與分期細節",m:"去哪查",b:"對客報價見『角色速查卡·銷售』；完整價目、優惠、分期以現場公告與結帳系統為準。特殊個案→主營養師／諮詢師。"},
+   {t:"系統實際畫面（截圖）",m:"去哪查",b:"操作步驟見『系統操作』頁；實際畫面截圖見《外部特約診所營養師培訓上線流程表》文件，或請帶班示範一次。"},
+   {t:"帳號／密碼／問卷驗證碼",m:"不放網頁",b:"基於資安，這些一律不放公開網頁。請見主檔機密頁（限定存取），或問帶班主管開通（SB 驗證、HIS 帳號都有專責窗口）。"},
+   {t:"影片課程",m:"去哪查",b:"Google Classroom（依階段 0–3 分主題）。連結見『影片課程』頁。"},
+   {t:"藥物劑量／調整／報告判讀／診斷",m:"轉醫師",b:"這些不是『查』的、是『轉』——一律交醫師。營養師只做用法衛教與回報。"},
+   {t:"客戶個別狀況／病史判斷",m:"轉醫師",b:"有相關病史、禁忌、能不能用藥或做療程→蒐集後告知醫師，不自行判斷。"},
+   {t:"醫美／療程替換、保健品改客保",m:"現場決定",b:"一律由現場個案決定（諮詢師），沒有固定對照表；現場遇到再處理。"},
+   {t:"排班／簽到退",m:"找窗口",b:"外部特約診所合作營養師管理表；兼職記得簽到退。細節問店長／帶班。"},
+   {t:"客戶消失／未上傳",m:"回報路徑",b:"由線上照顧營養師回報→診所客服 LINE 聯繫→交接下次回診 memo。"},
+   {t:"緊急狀況／用藥後嚴重不適",m:"回報路徑",b:"藥物不適可先停用並回報；緊急從 LINE@ 找客服；嚴重狀況由醫師評估。"},
+   {t:"對外可不可以講",m:"去哪查",b:"見『法遵·可講／不能講』頁；正式對客或對外文宣一律經法遵／法務審查。"},
+   {t:"考核／能力檢核／上線流程",m:"問帶班",b:"屬管理內容，在『管理後台』；細節問帶班主管。"},
+   {t:"以上都找不到？",m:"通則",b:"請問主營養師或帶班同仁；若仍不確定，回到安全三網——先說『我幫您向醫師／營養師確認』，先確認再回覆，比猜測更專業也更安心。"},
+  ]},
+  {id:"ethics",eyebrow:"心態與界線",title:"服務定位與職業道德",desc:"對客人而言，我們就是「診所的營養師」。守住專業界線、據實服務，是這份工作的根。",items:[
+   {t:"你是「診所的營養師」",m:"定位",b:"對客人而言，您就是診所團隊的一份子，不是外來第三方。被問『你哪家的』→『我是這裡的營養師，用 Cofit 的方法陪你完成療程。』Cofit 是背後的方法與制度、診所是客人信任的場域，對客人是同一個團隊。"},
+   {t:"核心觀念：飲食 80%＋藥物 20%",m:"觀念",b:"飲食與生活型態才是核心（80%）、藥物是輔助（20%）。關鍵句：藥物處理「生理」、營養師處理「行為」。藥把生理拉回可控，讓客戶有餘裕改變行為；沒有行為改變，藥一停就復胖——這正是療程要 8 週、營養師全程陪的原因。一療程約降 8%、每週目標 1%。"},
+   {t:"減重來自三個層面",m:"觀念",b:"藥物調整代謝（GLP-1 降食慾、延緩胃排空；SGLT-2 排糖）；營養師調整飲食結構（找胰島素負荷來源、調整蛋白與碳水、改進食順序與時間）；行為改變與持續追蹤（飲食記錄、個人化建議、提升長期依從）。"},
+   {t:"職業道德七項",m:"界線",b:"①守專業界線（藥物與診斷歸醫師，有疑慮回報醫師）②據實不誇大、不做療效保證③客戶利益優先、不為業績過度推銷④保護客戶隱私、不外傳私存⑤代表 Cofit 也代表診所⑥利益迴避與誠信（不體制外交易、不繞過流程、不洩定價內規）⑦與診所及跨團隊尊重協作。"},
+   {t:"統一正確流程",m:"App 原則",b:"<b>正確路徑：</b>客戶有問題 → 直接在 App 問營養師 → 營養師專業回覆。\n<b>要避免：</b>客戶不直接問、問題流到 Line 或由諮詢師代問，會造成回覆延遲、答案不一致、信任難建立。\n<b>做法：</b>每次衛教主動告訴客戶：『療程中飲食或保健品問題，請透過 App 問營養師。』"},
+  ]},
+ ],
+ back:[
+  {id:"path",eyebrow:"管理",title:"上線路徑",desc:"分階段帶新人上線，看的是能力而非時數。",items:[
+   {t:"階段0 入門",m:"第1天",b:"讀速查卡＋安全三網、看前諮參考影片2支。放行：能複述三張安全網＋A餐盤321。"},
+   {t:"階段1 現場服務",m:"第2–4天",b:"照A餐盤衛教、教App、指導保健品、填療程表。放行：能力檢核階段1全過＋考核面談通過。"},
+   {t:"階段2 前諮",m:"第2週",b:"建立關係、篩禁忌轉醫師、病史入系統、交接醫師、場控。放行：檢核階段2全過＋面談通過。"},
+   {t:"階段3 銷售/主營養師",m:"第3–4週",b:"報價方案、訂單/表單、續約、負責到底。放行：檢核階段3全過＋面談通過→依啟用清單開通。"},
+   {t:"陪跑快線",m:"各階段",b:"看2支影片→跟2場(觀察)→陪1場(他主講你補位)→獨立(有人待命)。『能獨立跑完一次』即放行。"},
+  ]},
+  {id:"check",eyebrow:"管理",title:"能力檢核（18項）",desc:"以『能獨立完成』為通過標準，每位新人一份。",items:[
+   {t:"階段1 現場",m:"6項",b:"①不看稿講完A餐盤321 ②帶客戶完成App連線回傳本名 ③正確指導當次保健品用法 ④遇不確定會說『幫您問醫師』不硬答 ⑤藥物不適正確回應(安撫+嚴重則停並回報) ⑥完成療程表/回診紀錄。"},
+   {t:"階段2 前諮",m:"6項",b:"①自信說明諮詢目的與胰島素阻抗 ②完整蒐集病史/減重史/用藥入系統 ③正確辨識並轉出禁忌族群 ④飲食只帶重點、細節導向營養師 ⑤場控依規則 ⑥彙整重點交接醫師。"},
+   {t:"階段3 銷售/主",m:"6項",b:"①正確報價與可否分期 ②完成訂單+一覽表+創建療程(含關聯訂單) ③走完抽血/領藥/衛教/預約交接 ④續療/未續療流程與收費正確 ⑤主營養師追蹤能說明並執行 ⑥HIS memo交接完整。"},
+  ]},
+  {id:"exam",eyebrow:"管理",title:"考核面談",desc:"每階段放行前進行。四構面總分 ≥15（滿分20）、每項 ≥3、且無紅旗方為通過。",items:[
+   {t:"基本情境(有標準答案)",m:"抽問",b:"藥怎麼作用→轉醫師；吃藥想吐→前1週常見+安撫、嚴重則停並回報；InBody判讀→不判讀帶回醫師；報價→正確數字+可否分期；消失→線上回報+客服LINE；A餐盤→3:2:1拳頭法。"},
+   {t:"靈活應變(★無標準答案)",m:"主管扮客人+加碼",b:"看：穩情緒、守界線、不失溫、適時求助。題例：客訴比較、殺價施壓(不折)、越界要求自行加藥(紅線)、情緒潰堤、被質疑有效性、多線同時、敏感隱私、不會的題(不硬掰)、現場不適、承諾陷阱(不保證數字)。主管可即興升級難度。"},
+   {t:"評分五構面",m:"1–4分",b:"①安全界線 ②腳本掌握 ③系統操作 ④應對與交接 ⑤臨場應變。總分≥15且每項≥3、無紅旗為通過。"},
+   {t:"紅旗(一票否決)",m:"安全優先",b:"自行判讀報告/解說藥理；被施壓後鬆口給調劑量/加量；對禁忌族群未轉醫師；報錯價或為成交承諾療效/保證數字。"},
+  ]},
+  {id:"activate",eyebrow:"管理",title:"考核後啟用清單",desc:"通過考核後才啟用。帳號密碼一律見主檔機密頁，不放在網頁上。",items:[
+   {t:"開通權限",m:"系統",b:"HIS 專屬連線碼(通過考核才給)；HIS帳號→涵麟 Jessica；SB預約與驗證窗口→週一~五 Winnie、週六 小玉；Cofit App 專家連線。"},
+   {t:"加入群組",m:"群組",b:"Cofit專家群、LINE現場群(回報客戶狀態/斷點交接)、線上帶班營養師群、與客服/線上營養師聯繫區。"},
+   {t:"共用文件+行政",m:"文件",b:"付款一覽表、學員名單、培訓主檔/速查卡；外部特約診所合作營養師管理表(兼職簽到退)；首次排班→陪跑收尾→獨立；完成啟用簽核。"},
+  ]},
+  {id:"plan90",eyebrow:"管理",title:"上線後90天",desc:"把訓練成果連結到成交、續約、上傳與消失四項指標。",items:[
+   {t:"里程碑",m:"0–90天",b:"1–2週 安全獨立跑現場；3–4週 前諮轉化；第2月 成交(獨立銷售、流程零錯)；第3月 留存(續約、消失率↓)；第90天 認證轉正。門檻依團隊基線設定。"},
+   {t:"教練節奏",m:"1:1",b:"1:1(15–20分)：看數字→一個做得好→一個要練→下週一個具體目標。跟診/錄音複盤：先自評再給一個修正。刻意練習：每週一個弱項練到穩。"},
+   {t:"指標儀表板",m:"四指標",b:"成交率、續約率、上傳率、消失率(＋安全/客訴事件)。填門檻與當前值；未達→回對應模組補練。"},
+  ]},
+  {id:"trainer",eyebrow:"管理",title:"帶教者手冊與校準",desc:"讓不同帶教者打分一致，訓練品質才能穩定複製。",items:[
+   {t:"評分錨定(3分=合格)",m:"校準",b:"安全界線：該轉一律轉、不越界。腳本掌握：不看稿完整正確。系統操作：獨立完成欄位正確。應對交接：不確定會問、紀錄完整。臨場應變：穩情緒、守界線、適時求助。(4分=更進一階；1–2=有缺口)"},
+   {t:"校準做法",m:"一致性",b:"新帶教者首兩次與資深同場各自評分、對齊；每月抽一份雙人複評，差≥2分就討論錨定。注意月暈/寬嚴/近因偏誤。紅旗二元判定、不通融。"},
+   {t:"照護文化",m:"為什麼",b:"我們做的是醫療級體重管理：安全與誠信永遠優先於成交，營養師是客戶的長期夥伴，不是推銷員。"},
+  ]},
+  {id:"change",eyebrow:"管理",title:"改版再訓練機制",desc:"教材一有更新，確保每位同仁都同步到最新版本。",items:[
+   {t:"單一真實來源",m:"原則",b:"主檔為唯一權威，速查卡/測驗/網頁都從主檔衍生；只改主檔再往下同步(含本網頁)。"},
+   {t:"影響分級",m:"再訓練",b:"重大(價格/劑量/安全界線/流程)→受影響角色必讀+重考；一般(話術/營養品細節)→公告+1:1帶到；微幅(錯字)→僅記錄。"},
+   {t:"再認證+版本",m:"控管",b:"重大變更發『變更確認表單』確認已讀已懂(未回不算更新)；Classroom重指派；速查卡/網頁標對應主檔版本，回收舊版。"},
+  ]},
+ ]
+};
+
+/* ====== 狀態與渲染 ====== */
+let mode="front", active=null, unlocked=false;
+
+function sections(){return DATA[mode];}
+function setMode(m){
+  if(m==="back" && !unlocked){ openGate(); return; }
+  mode=m; active=null;
+  document.getElementById("m-front").setAttribute("aria-pressed", m==="front");
+  document.getElementById("m-back").setAttribute("aria-pressed", m==="back");
+  buildChips(); render(); window.scrollTo(0,0);
+}
+function buildChips(){
+  const c=document.getElementById("chips"); c.innerHTML="";
+  sections().forEach((s,i)=>{
+    const b=document.createElement("button");
+    b.className="chip"; b.textContent=s.title;
+    b.setAttribute("aria-current", (active===s.id)||(active===null&&i===0)?"true":"false");
+    b.onclick=()=>{active=s.id; document.getElementById("q").value=""; buildChips(); render();
+      document.querySelector('main').scrollIntoView({behavior:'smooth',block:'start'});};
+    c.appendChild(b);
+  });
+}
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function hl(txt,q){ // keep our <b> tags, escape rest, highlight query
+  return txt.split(/(<b>|<\/b>)/).map(seg=>{
+    if(seg==="<b>"||seg==="</b>")return seg;
+    let e=esc(seg);
+    if(q){const re=new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+")","gi"); e=e.replace(re,"<mark>$1</mark>");}
+    e=e.replace(/(https?:\/\/[^\s，、。）)]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+    return e;
+  }).join("");
+}
+function render(){
+  const q=document.getElementById("q").value.trim();
+  const host=document.getElementById("content"); host.innerHTML="";
+  let secs=sections();
+  if(q){ // search across all sections of current mode
+    let any=false;
+    secs.forEach(s=>{
+      const hits=s.items.filter(it=>(it.t+it.b+(it.m||"")).toLowerCase().includes(q.toLowerCase()));
+      if(hits.length){any=true; host.appendChild(secEl(s,hits,q));}
+    });
+    if(!any) host.innerHTML='<div class="empty">找不到「'+esc(q)+'」。<br>試試：海鹽、猛健樂、關聯訂單、續療、開班、禁忌。</div>';
+  }else{
+    const s = secs.find(x=>x.id===active) || secs[0];
+    host.appendChild(secEl(s,s.items,""));
+  }
+}
+function splitTop(str){var out=[],buf="",d=0;for(var i=0;i<str.length;i++){var ch=str[i];if(ch==="（"||ch==="(")d++;else if(ch==="）"||ch===")")d=Math.max(0,d-1);if(ch==="；"&&d===0){out.push(buf);buf="";}else buf+=ch;}if(buf)out.push(buf);return out.map(function(s){return s.trim();}).filter(Boolean);}
+function renderBody(body,q){
+  return body.split("\n").map(seg=>{
+    seg=seg.trim(); if(!seg)return"";
+    let label="", rest=seg;
+    let m=seg.match(/^<b>([^<]+：)<\/b>\s*(.*)$/);           // <b>標籤：</b>
+    if(m){label=m[1];rest=m[2];}
+    else{ m=seg.match(/^([^：<\n]{1,12}：)([\s\S]*)$/);       // 短的 純文字標籤：
+      if(m && !/[0-9０-９]/.test(m[1]) && m[2].indexOf('：')===-1){label=m[1];rest=m[2].trim();} }
+    const hasNum=/[①②③④⑤⑥⑦⑧⑨⑩]/.test(rest);
+    const topParts=splitTop(rest);
+    const semis=topParts.length-1;
+    const arrows=(rest.match(/→/g)||[]).length;
+    let inner;
+    if(hasNum){
+      const parts=rest.split(/(?=[①②③④⑤⑥⑦⑧⑨⑩])/).map(s=>s.trim()).filter(Boolean);
+      inner=parts.map(s=>'<div class="numline">'+hl(s,q)+'</div>').join("");
+    }else if(semis>=2){
+      inner='<ul class="bullets">'+topParts.map(s=>'<li>'+hl(s,q)+'</li>').join("")+'</ul>';
+    }else if(arrows>=2 && semis===0){
+      const steps=rest.split(/→/).map(s=>s.trim()).filter(Boolean);
+      inner='<ol class="steps">'+steps.map(s=>'<li>'+hl(s,q)+'</li>').join("")+'</ol>';
+    }else{
+      inner='<div class="ftext">'+hl(rest,q)+'</div>';
+    }
+    return '<div class="field">'+(label?'<div class="flabel">'+hl(label,q)+'</div>':'')+inner+'</div>';
+  }).join("");
+}
+function secEl(s,items,q){
+  const wrap=document.createElement("section");
+  wrap.innerHTML='<div class="eyebrow">'+esc(s.eyebrow)+'</div><h2 class="sec-title">'+esc(s.title)+'</h2><p class="sec-desc">'+esc(s.desc)+'</p>';
+  items.forEach(it=>{
+    const card=document.createElement("div");
+    const safe = s.id==="law" ? "" : "";
+    card.className="card";
+    card.innerHTML='<h3>'+hl(it.t,q)+(it.m?'<span class="meta">'+esc(it.m)+'</span>':'')+'</h3><div class="body">'+renderBody(it.b,q)+'</div>';
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
+
+/* overlays */
+function openSheet(k){document.getElementById("ov-"+k).classList.add("open");}
+function closeSheet(k){document.getElementById("ov-"+k).classList.remove("open");}
+function openGate(){document.getElementById("ov-gate").classList.add("open");setTimeout(()=>document.getElementById("pass").focus(),50);}
+function closeGate(){document.getElementById("ov-gate").classList.remove("open");document.getElementById("gate-err").textContent="";document.getElementById("pass").value="";}
+function tryGate(){
+  const v=document.getElementById("pass").value;
+  if(v===PASSCODE){ unlocked=true; closeGate(); setMode("back"); }
+  else{ document.getElementById("gate-err").textContent="通行碼不正確。"; }
+}
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("open");}));
+
+document.getElementById("foot").textContent="Cofit 外部特約診所 · 營養師上線手冊　—　願這份手冊讓您上線更安心。內容以主檔為單一真實來源，更新後請同步。";
+buildChips(); render();
+</script>
+</body>
+</html>
