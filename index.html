@@ -106,9 +106,12 @@ mark{background:#fdf0c8;color:inherit;padding:0 1px;border-radius:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media(min-width:640px){.sec-title{font-size:27px}.hd{padding:14px 16px}}
 .copytext{white-space:pre-wrap;background:#eef7f6;border:1px solid #cfe6e3;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.75;color:#16302e;margin:10px 0 8px;user-select:all;-webkit-user-select:all;}.copybtn{appearance:none;-webkit-appearance:none;border:none;background:#0f766e;color:#fff;font-size:15px;font-weight:600;padding:10px 18px;border-radius:12px;cursor:pointer;}.copybtn:active{opacity:.82;}
+#sitelock{position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#0f766e,#0b5c55);display:flex;align-items:center;justify-content:center;padding:24px;}#sitelock .lockcard{background:#fff;border-radius:18px;padding:28px 22px;max-width:360px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,.32);text-align:center;}#sitelock h2{margin:0 0 4px;color:#0f766e;font-size:20px;}#sitelock p{margin:0;color:#5b7573;font-size:13px;}#sitelock input{width:100%;padding:12px 14px;border:1px solid #cfe0de;border-radius:10px;font-size:16px;margin-top:16px;}#sitelock .go{margin-top:12px;width:100%;background:#0f766e;color:#fff;border:none;padding:12px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;}#sitelock .go:active{opacity:.85}#sitelock .err{color:#c0392b;font-size:14px;min-height:18px;margin-top:8px;}#sitelock .fine{margin-top:14px;font-size:11px;color:#8aa3a0;line-height:1.5}body.locked{overflow:hidden}
 </style>
 </head>
 <body>
+<div id="sitelock"><div class="lockcard"><h2>營養師上線手冊</h2><p>請輸入通行碼以檢視內容</p><input id="sitepass" type="password" placeholder="輸入通行碼" autocomplete="off" onkeydown="if(event.key==='Enter')trySiteLock()"><div class="err" id="sitelock-err"></div><button class="go" onclick="trySiteLock()">進入</button><div class="fine">此通行碼為內部分流用途，非機密資料保護；帳密等機密不放於本網頁。</div></div></div>
+
 
 <header>
   <div class="hd">
@@ -189,6 +192,8 @@ const DATA = {
    {t:"抽血地點・務必提醒",m:"兩院",b:"<b>廣川：</b>抽血須另前往『廣川醫院檢驗中心』報到。\n<b>佳醫：</b>院內抽血（3F／2F 動線），不需另到外部檢驗所。\n<b>兩院共通：</b>抽血單不能給錯（FR01D＝三段式 OGTT／FR06D＝空腹），一張單只給一位客人。"},
   ]},
   {id:"timeline",eyebrow:"療程",title:"回診時間軸",desc:"四次門診（含初診）的共用時間軸，安排回診時可對照。",items:[
+   {t:"回診前 HIS 備註（本次回診目的）",m:"每次回診必做",b:"每次回診『前』，營養師務必在 HIS 預約表的「備註」欄填『本次回診目的』，讓醫師看診前快速確認、避免流程疏漏（回診流程為量測完直接見醫師）。\n<b>標準寫法：</b>\n・未入療看報告\n・1-1 看報告\n・1-2 拿藥\n・1-2 看報告\n・純回診（初診已有報告→約兩週後，僅第一療程會發生）\n・X-2 拿藥（續療進階，如 2-2 拿藥）\n・X-2 看報告（續療進階）"},
+   {t:"開始用藥時間",m:"規則",b:"藥物一律『抽血後』即可開始使用。除非醫師有特別安排——此時醫師須在 HIS 註記說明，營養師依註記轉達客人。"},
    {t:"首次8週療程",m:"W1→W8",b:"W1 初診：入療程＋抽血 FR01D → W2 看抽血報告(1-1) → W4 拿第二個月藥(1-2拿藥) → W7 抽血 FR06D(不用回診) → W8 看第二份報告(1-2看報告)決定續約。共四次門診含初診。"},
    {t:"線上開班時間",m:"週三分界",b:"入療在『週三之前』→最快下週一開班；入療在『週三之後』→下下週一開班。開班固定週一，營養師自開班日起評估餐盤。"},
    {t:"抽血代號",m:"FR",b:"含OGTT：FR01D(三段式、第一週)；不含OGTT：FR06D(第七週)。續療 FR01D 約半年抽一次(第3/6/9療程)。"},
@@ -209,12 +214,12 @@ const DATA = {
    {t:"📋 初診【純門診／入檢驗】",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（若入檢驗，記得約 抽血FR01D 及 未入療看報告時間）\n📍方案：未入療程(僅門診) / 入檢驗\n📍加購營養品：\n📍檢測：FR01D\n📍客戶注意事項：\n〔衛教內容〕\n📌療程動機：\n📌餐盤：\n📌水分：\n📌餐次：\n📌過敏／禁忌：\n📌飲食調整目標：\n📌特別注意："},
    {t:"📋 初診【入療程】",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 抽血FR01D 及 1-1看報告時間）\n📍方案：入療 ＯＯＯＯＯ元\n📍療程藥物：腸泌素(Wegovy／Mounjaro／Rybelsus) / 排糖(Jardiance 25mg) / Zn / Mg / Ocean / 鹽巴\n📍療程內 CofitMe＊1盒(共2盒)：（寫實際名稱＋用法，見『營養品模板』）\n📍加購營養品：\n📍(預估)藥物開始起迄日：XX/XX～XX/XX\n📍FLC 營養課程起始日：\n📍客戶注意事項：\n〔衛教內容〕\n📌療程動機／餐盤／水分／餐次／過敏禁忌／飲食調整目標／特別注意"},
    {t:"📋 未入看報告【當天入療／當天不入療】",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 1-2拿藥時間）\n📍方案：未入療程看報告(未入療) / 未入療程看報告(入療) ＯＯＯＯＯ元\n📍療程藥物：腸泌素(Wegovy／Mounjaro／Rybelsus) / 排糖(Jardiance 25mg) / Zn / Mg / Ocean / 鹽巴\n📍療程內 CofitMe＊1盒(共2盒)：（見營養品模板）\n📍加購營養品：\n📍(預估)藥物開始起迄日：MM/DD～MM/DD\n📍FLC 起始日：\n📍客戶注意事項：\n〔衛教內容〕📌療程動機／餐盤／水分／餐次／過敏禁忌／飲食調整目標／特別注意"},
-   {t:"📋 1-1 看報告",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 1-2拿藥時間）\n📍回診項目：1-1 看報告\n📍加購營養品：\n〔衛教內容〕\n📌餐盤：\n📌水分：\n📌運動：\n📌睡眠：\n📌注意事項："},
-   {t:"📋 純回診（初診已有報告）",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 1-2拿藥時間）\n📍回診項目：純回診\n📍加購營養品：\n〔衛教內容〕\n📌餐盤：\n📌水分：\n📌運動：\n📌睡眠：\n📌注意事項："},
-   {t:"📋 1-2 拿藥",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 抽血FR06D＋1-2看報告時間）\n📍回診項目：1-2 拿藥\n📍療程藥物：腸泌素(Wegovy／Mounjaro／Rybelsus) / 排糖(Jardiance 25mg) / Zn / Mg\n📍療程內 CofitMe＊1盒(共2盒)：（見營養品模板）\n📍加購營養品：\n📍1-2 藥物開始使用時間：\n📍約抽血時間：XX/XX\n📍約 1-2 看報告時間：XX/XX\n〔衛教內容〕📌餐盤／水分／運動／睡眠／注意事項"},
-   {t:"📋 1-2 看報告",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（若續療，記得約 2-2拿藥時間）\n📍回診項目：1-2 看報告\n📍續療方案：未續療 / 續進階 ＯＯＯＯＯ元\n📍續療程藥物：腸泌素(Wegovy／Mounjaro／Rybelsus) / 排糖(Jardiance 25mg) / Zn / Mg / Ocean / 鹽巴\n📍續療程內 CofitMe＊1盒(共2盒)：（見營養品模板）\n📍加購營養品：\n〔衛教內容〕📌餐盤／水分／運動／睡眠／注意事項"},
-   {t:"📋 進階 X-2 拿藥（X＝第 n 療程）",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 抽血FR06D＋X-2看報告時間）\n📍回診項目：2-2 拿藥\n📍療程藥物：腸泌素／排糖(Jardiance 25mg)／Zn／Mg\n📍療程內 CofitMe＊1盒(共2盒)：（見營養品模板）\n📍加購營養品：\n📍X-2 藥物開始使用時間：\n📍約抽血時間：XX/XX　📍約 X-2 看報告時間：XX/XX\n〔衛教內容〕📌餐盤／水分／運動／睡眠／注意事項"},
-   {t:"📋 進階 X-2 看報告",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（若續療，記得約下一次拿藥時間）\n📍回診項目：X-2 看報告\n📍續療方案：未續療 / 續進階 ＯＯＯＯＯ元\n📍續療程藥物／CofitMe＊1盒(共2盒)／加購營養品：\n〔衛教內容〕📌餐盤／水分／運動／睡眠／注意事項"},
+   {t:"📋 1-1 看報告",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 1-2拿藥時間）\n📍本次回診目的（HIS備註欄先填）：\n📍回診項目：1-1 看報告\n📍加購營養品：\n〔衛教內容〕\n📌餐盤：\n📌水分：\n📌運動：\n📌睡眠：\n📌注意事項："},
+   {t:"📋 純回診（初診已有報告）",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 1-2拿藥時間）\n📍本次回診目的（HIS備註欄先填）：\n📍回診項目：純回診\n📍加購營養品：\n〔衛教內容〕\n📌餐盤：\n📌水分：\n📌運動：\n📌睡眠：\n📌注意事項："},
+   {t:"📋 1-2 拿藥",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 抽血FR06D＋1-2看報告時間）\n📍本次回診目的（HIS備註欄先填）：\n📍回診項目：1-2 拿藥\n📍療程藥物：腸泌素(Wegovy／Mounjaro／Rybelsus) / 排糖(Jardiance 25mg) / Zn / Mg\n📍療程內 CofitMe＊1盒(共2盒)：（見營養品模板）\n📍加購營養品：\n📍1-2 藥物開始使用時間：\n📍約抽血時間：XX/XX\n📍約 1-2 看報告時間：XX/XX\n〔衛教內容〕📌餐盤／水分／運動／睡眠／注意事項"},
+   {t:"📋 1-2 看報告",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（若續療，記得約 2-2拿藥時間）\n📍本次回診目的（HIS備註欄先填）：\n📍回診項目：1-2 看報告\n📍續療方案：未續療 / 續進階 ＯＯＯＯＯ元\n📍續療程藥物：腸泌素(Wegovy／Mounjaro／Rybelsus) / 排糖(Jardiance 25mg) / Zn / Mg / Ocean / 鹽巴\n📍續療程內 CofitMe＊1盒(共2盒)：（見營養品模板）\n📍加購營養品：\n〔衛教內容〕📌餐盤／水分／運動／睡眠／注意事項"},
+   {t:"📋 進階 X-2 拿藥（X＝第 n 療程）",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（記得約 抽血FR06D＋X-2看報告時間）\n📍本次回診目的（HIS備註欄先填）：\n📍回診項目：2-2 拿藥\n📍療程藥物：腸泌素／排糖(Jardiance 25mg)／Zn／Mg\n📍療程內 CofitMe＊1盒(共2盒)：（見營養品模板）\n📍加購營養品：\n📍X-2 藥物開始使用時間：\n📍約抽血時間：XX/XX　📍約 X-2 看報告時間：XX/XX\n〔衛教內容〕📌餐盤／水分／運動／睡眠／注意事項"},
+   {t:"📋 進階 X-2 看報告",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"（若續療，記得約下一次拿藥時間）\n📍本次回診目的（HIS備註欄先填）：\n📍回診項目：X-2 看報告\n📍續療方案：未續療 / 續進階 ＯＯＯＯＯ元\n📍續療程藥物／CofitMe＊1盒(共2盒)／加購營養品：\n〔衛教內容〕📌餐盤／水分／運動／睡眠／注意事項"},
    {t:"📋 營養品模板（用法一覽・填空用）",m:"填空後複製",b:"填好 📍欄位後點『複製整段』貼進 HIS：",copy:"📍CofitMe：L055代謝包／L064熱能包／L082舒釋包／H015消食包／H024賦活包／H033鬆弛包 → 飯前／飯後／睡前，每日一次、一次一包（依包別，見 09）\n📍海鹽：每天6小匙分散於水與食物\n📍Cofit 鎂日補給液：每次3滴、每天2次\n📍鎂錠：睡前1顆\n📍鋅錠：每次1顆、每天1次\n📍大餐救援包／覺醒：餐前1包\n📍納豆紅麴Q10：每次2顆/天\n📍苦瓜胜肽：每次2顆/天\n📍極黑生薑黃：每次2顆/天\n📍冰島甲殼素：每次1-2顆/天\n📍(初日)順酵膠囊：隨餐2顆/天(挑最大餐)\n📍(初日)紓衡EX：每次2顆/天\n📍(初日)優鮮魚油：每次2顆/天\n📍(初日)醣阻PLUS：餐前2顆/天(挑最大餐)\n📍(初日)穩怡：餐前2顆/天\n📍維生素D3滴劑：每次5滴/天(2000IU) 或 0.3cc/天(4500IU)"}
   ]},
   {id:"n211",eyebrow:"未入療衛教",title:"未入療衛教",desc:"初診未入療時只教這一個餐盤（N／211 餐盤），不講其他餐盤。",items:[
@@ -433,6 +438,7 @@ function secEl(s,items,q){
 
 /* overlays */
 function copyTpl(btn){var pre=btn.previousElementSibling;var t=pre?pre.textContent:"";if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(btn);},function(){fb(pre,btn);});}else{fb(pre,btn);}}function fb(pre,btn){var r=document.createRange();r.selectNodeContents(pre);var s=window.getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand("copy");done(btn);}catch(e){}s.removeAllRanges();}function done(btn){var o=btn.textContent;btn.textContent="✓ 已複製";setTimeout(function(){btn.textContent=o;},1500);}
+function trySiteLock(){var v=document.getElementById("sitepass").value;if(v===PASSCODE){unlocked=true;document.body.classList.remove("locked");var l=document.getElementById("sitelock");if(l)l.style.display="none";buildChips();render();}else{document.getElementById("sitelock-err").textContent="通行碼不正確。";}}
 function openSheet(k){document.getElementById("ov-"+k).classList.add("open");}
 function closeSheet(k){document.getElementById("ov-"+k).classList.remove("open");}
 function openGate(){document.getElementById("ov-gate").classList.add("open");setTimeout(()=>document.getElementById("pass").focus(),50);}
@@ -445,7 +451,8 @@ function tryGate(){
 document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("open");}));
 
 document.getElementById("foot").textContent="Cofit 外部特約診所 · 營養師上線手冊　—　願這份手冊讓您上線更安心。內容以主檔為單一真實來源，更新後請同步。";
-buildChips(); render();
+document.body.classList.add("locked");
+setTimeout(function(){var s=document.getElementById("sitepass");if(s)s.focus();},60);
 </script>
 </body>
 </html>
